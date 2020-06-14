@@ -44,29 +44,38 @@ router.get('/:user_id', async (req, res)=>  {
     } 
 })
 
-router.put('/', async (req, res)=>    {
-    return res.status(500).json({ message: 'Anything', })
+router.patch('/edit', async (req, res)=>    {
     try {
-        // const reqUser=req.body
-        console.log('updateUreqUserser: ')
-        // const updateUser=reqUser.name!==undefined && reqUser.role!==undefined?{ name: reqUser.name, role: reqUser.role }:reqUser.name==undefined?{ role: reqUser.role }:{ name: reqUser.name }
+        const reqUser=req.body
+        const updateUser=reqUser.name!==undefined && reqUser.role!==undefined?{ name: reqUser.name, role: reqUser.role }:reqUser.name==undefined?{ role: reqUser.role }:{ name: reqUser.name }
 
-        // const updateUser={ role: reqUser.role }
-        // console.log('updateUser: ',updateUser)
-    //     const result=await User.update({ role: reqUser.role }, { where: { user_id: reqUser.user_id } }) 
+        const result=await User.update(updateUser, { where: { user_id: reqUser.user_id } }) 
 
-
-    //     if(result)  {
-    //         return res.status(200).json({ message: 'Successfully edited the user', user: result })
-    //     }   else    {
-    //         return res.status(500).json({ message: 'Failed to edit the user', })
-    //     }
+        if(result[0]!==0)  {
+            return res.status(200).json({ message: 'Successfully edited the user', user: result })
+        }   else    {
+            return res.status(400).json({ message: 'Failed to edit the user', })
+        }
     }   catch(err)  { 
         return res.status(500).json({ message: 'Failed to edit the user', })
     } 
 })
 
+router.patch('/edit/password', async (req, res)=>    {
+    try {
+        const reqUser=req.body
 
+        const result=await User.update({ password: md5(reqUser.new_password) }, { where: { user_id: reqUser.user_id, password: md5(reqUser.old_password) } }) 
+
+        if(result[0]!==0)  {
+            return res.status(200).json({ message: 'Successfully changed the password', user: result })
+        }   else    {
+            return res.status(400).json({ message: 'Failed to change the password', })
+        }
+    }   catch(err)  { 
+        return res.status(500).json({ message: 'Failed to change the password', })
+    } 
+})
 
 
 
