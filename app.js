@@ -7,6 +7,7 @@ import jwt from 'jsonwebtoken'
 import registerRouter from './routes/register.js'
 import loginRouter from './routes/login.js'
 import userRouter from './routes/user.js' 
+import postRouter from './routes/post.js'
 
 
 const app=express()
@@ -16,9 +17,9 @@ app.use(bodyParser.json({ limit: '50mb' }))
 app.use('/login', loginRouter)
 app.use('/register', registerRouter)
 
-app.use(verifyToken)
+// app.use(verifyToken)
 app.use('/user', userRouter)
-
+app.use('/post', postRouter)
 
 
 
