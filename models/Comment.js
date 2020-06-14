@@ -18,7 +18,9 @@ const Comment=database.define('comments',   {
         type: Sequelize.INTEGER,
         model: 'users',
         key: 'user_id'
-    }
+    },
+    CreatedAt: Sequelize.DATE,
+    UpdatedAt: Sequelize.DATE  
 })
 
 export default Comment

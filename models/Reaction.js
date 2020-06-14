@@ -20,7 +20,9 @@ const Reaction=database.define('reactions', {
         type: Sequelize.INTEGER,
         model: 'users',
         key: 'user_id'
-    }
-})
+    },
+    createdAt: Sequelize.DATE,
+    updatedAt: Sequelize.DATE
+})  
 
 export default Reaction
