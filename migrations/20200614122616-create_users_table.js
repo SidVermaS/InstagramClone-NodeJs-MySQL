@@ -24,7 +24,8 @@ module.exports = {
         type: Sequelize.STRING,
       },
       mobile_no: {
-        type: Sequelize.BIGINT
+        type: Sequelize.BIGINT,
+        unique: true
       },
       password: {
         type: Sequelize.TEXT 

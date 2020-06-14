@@ -1,5 +1,5 @@
 import Sequelize from 'sequelize'
-import database from '../config/database'
+import database from '../config/database.js'
 
 const Reaction=database.define('reactions', {
     reaction_id:    {

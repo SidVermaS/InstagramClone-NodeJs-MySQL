@@ -1,9 +1,9 @@
 import express from 'express'
-router=express.Router()
+const router=express.Router()
 
 import md5 from 'md5'
 
-import User from '../models/User'
+import User from '../models/User.js'
 
 router.post('/', async (req, res)=> {
     try {
@@ -15,7 +15,11 @@ router.post('/', async (req, res)=> {
             name: reqUser.name,
             role: reqUser.role
         })
-        return res.status(201).json({ message: 'Successfully registered', result: result })
+        if(result)  {
+            return res.status(201).json({ message: 'Successfully registered', result: result })
+        }   else    {
+            return res.status(500).json({ message: 'Failed to register', error: result })
+        }        
     }   catch(err)  { 
         return res.status(500).json({ message: 'Failed to register', error: err })
     } 

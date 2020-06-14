@@ -1,7 +1,7 @@
 import express from 'express'
 const router=express.Router()
 
-import Post from '../models/Post'
+import Post from '../models/Post.js'
 
 router.post('/', async (req, res)=> {
     try {
@@ -20,9 +20,9 @@ router.post('/', async (req, res)=> {
 
 router.get('/', async (req, res)=>  {
     try {
-        const reqPost=req.query
+        const page=parseInt(req.query.page)
         
-
+        const result=
 
 
 

@@ -2,7 +2,7 @@ import express from 'express'
 const router=express.Router()
 
 import md5 from 'md5'
-import User from '../models/User'
+import User from '../models/User.js'
 
 router.get('/', async (req, res)=>  {    
     try {

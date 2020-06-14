@@ -1,5 +1,5 @@
 import Sequelize from 'sequelize'
-import database from '../config/database'
+import database from '../config/database.js'
 
 const User=database.define('users', {
     user_id:    {
