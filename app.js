@@ -9,18 +9,7 @@ import loginRouter from './routes/login'
 import userRouter from './routes/user' 
 
 
-
-
-
-
-
-
-
-
-
-
-
-const app=express()
+var app=express()
 app.use(cors())
 app.use(bodyParser.json({ limit: '50mb' }))
 
@@ -66,31 +55,3 @@ function verifyToken(req, res, next) {
 }
 
 export default app
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
