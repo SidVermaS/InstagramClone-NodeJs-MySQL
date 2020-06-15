@@ -31,16 +31,6 @@ app.use(fileupload())
 app.use('/upload', uploadRouter)
 
 
-
-
-
-
-
-
-
-
-
-
 function verifyToken(req, res, next) {
     const bearerHeader=req.headers['authorization']
 
