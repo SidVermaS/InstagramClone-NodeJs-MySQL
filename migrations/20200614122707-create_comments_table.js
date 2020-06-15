@@ -32,7 +32,9 @@ module.exports = {
         model: 'users',
         key: 'user_id'
         }
-      }
+      },
+      createdAt: Sequelize.DATE,
+      updatedAt: Sequelize.DATE
     })
   },
 

@@ -15,7 +15,7 @@ router.post('/', async (req, res)=> {
         })
 
         if(result)  {      
-            return res.status(201).json({ message: 'Successfully commented', result: result })
+            return res.status(201).json({ message: 'Successfully commented', comment: result })
         }   else    {
             return res.status(400).json({ message: 'Failed to comment', })
         }
@@ -59,27 +59,20 @@ router.get('/:post_id', async (req, res)=>  {
 
 router.delete('/', async (req, res)=>   {
     try {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-}   catch(err)  { 
-    return res.status(500).json({ message: 'Failed to load the comments', error: err })
-} 
+        console.log('cid: ',req.body)
+        const result=await Comment.destroy({
+            where: {
+                comment_id: req.query.comment_id                
+            }
+        })
+        if(result[0]!==0)  {
+            return res.status(200).json({ message: 'Successfully deleted the comment', comment: result })
+        }   else    {
+            return res.status(500).json({ message: 'Failed to delete the comment', })
+        } 
+    }   catch(err)  { 
+        return res.status(500).json({ message: 'Failed to delete the comment', error: err })
+    } 
 })
 
 export default router
