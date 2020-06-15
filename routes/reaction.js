@@ -62,9 +62,19 @@ router.get('/', async (req, res)=>   {
         const reqReaction=req.query
         const limit=10
 
+        User.hasOne(Reaction, { foreignKey: 'user_id' })
+        Reaction.belongsTo(User, { foreignKey: 'user_id', targetKey: 'user_id' })
+
         const result=await Reaction.findAll({
             offset: parseInt(reqReaction.page)*limit,
             limit: limit,
+            attributes: ['reaction_id', 'status'],
+            include:    [
+                {
+                    model: User,
+                    attributes: ['user_id', 'name', 'photo_url']
+                }
+            ],
             where:   reqReaction.status==='all'?
             {
                 post_id: reqReaction.post_id
