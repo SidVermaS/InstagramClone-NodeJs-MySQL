@@ -21,7 +21,7 @@ router.patch('/', async (req, res)=>    {
                         user_id: reqReaction.user_id
                     }
                 })
-                if(result)  {
+                if(result[0]!==0)  {
                     return res.status(201).json({ message: 'Successfully dereacted', reaction: result })         
                 }   else    {
                     return res.status(400).json({ message: 'Failed to dereact', })
@@ -34,7 +34,7 @@ router.patch('/', async (req, res)=>    {
                             user_id: reqReaction.user_id
                         } 
                     })
-                if(result)  {
+                if(result[0]!==0)  {
                     return res.status(201).json({ message: 'Successfully reacted', reaction: result1 })         
                 }   else    {
                     return res.status(400).json({ message: 'Failed to react', })
@@ -57,23 +57,30 @@ router.patch('/', async (req, res)=>    {
     } 
 })
 
+router.get('/', async (req, res)=>   {
+    try {
+        const reqReaction=req.query
+        const limit=10
 
+        const result=await Reaction.findAll({
+            offset: parseInt(reqReaction.page)*limit,
+            limit: limit,
+            where:   reqReaction.status==='all'?
+            {
+                post_id: reqReaction.post_id
+            }:{
+                post_id: reqReaction.post_id,
+                status: reqReaction.status
+            }
+        })
+        if(result)  {
+            return res.status(200).json({ message: 'Successfully loaded the reactions', reactions: result })
+        }   else    {
+            return res.status(500).json({ message: 'Failed to load the reactions', })
+        }  
+    }   catch(err)  { 
+        return res.status(500).json({ message: 'Failed to load the reactions', error: err })
+    } 
+})
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+export default router
