@@ -21,7 +21,7 @@ app.use(bodyParser.json({ limit: '50mb' }))
 app.use('/login', loginRouter)
 app.use('/register', registerRouter)
 
-// app.use(verifyToken)
+app.use(verifyToken)
 app.use('/user', userRouter)
 app.use('/post', postRouter)
 app.use('/reaction', reactionRouter)
