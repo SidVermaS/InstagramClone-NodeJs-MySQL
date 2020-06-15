@@ -13,12 +13,22 @@ const Post=database.define('posts', {
     },
     photo_url: Sequelize.STRING,
     user_id:    {  
-        type: Sequelize.INTEGER,  
-        model: 'users',
-        key: 'user_id'
+        type: Sequelize.INTEGER, 
+        references: { 
+            model: 'users',
+            key: 'user_id'
+        }
     },
-    createdAt: Sequelize.DATE,
-    updatedAt: Sequelize.DATE
+    createdAt: {
+        type: Sequelize.DATE,
+        allowNull: false,
+        defaultValue: Sequelize.NOW
+    },   
+    updatedAt: {
+        type: Sequelize.DATE,
+        allowNull: false,
+        defaultValue: Sequelize.NOW
+    }
 })
 
 export default Post

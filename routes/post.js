@@ -1,6 +1,7 @@
 import express from 'express'
 const router=express.Router()
 
+
 import Post from '../models/Post.js'
 import User from '../models/User.js'
 
@@ -8,7 +9,7 @@ router.post('/', async (req, res)=> {
     try {
         const reqPost=req.body
 
-        const result=await Post.Create({
+        const result=await Post.create({
             caption: reqPost.caption,
             photo_url: reqPost.photo_url,
             user_id: reqPost.user_id
@@ -25,7 +26,7 @@ router.post('/', async (req, res)=> {
 
 router.get('/', async (req, res)=>  {
     try {
-        const limit=3
+        const limit=10
         const page=parseInt(req.query.page)
         
         User.hasOne(Post, { foreignKey: 'user_id' })

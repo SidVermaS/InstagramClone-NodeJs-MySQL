@@ -8,6 +8,7 @@ import registerRouter from './routes/register.js'
 import loginRouter from './routes/login.js'
 import userRouter from './routes/user.js' 
 import postRouter from './routes/post.js'
+import commentRouter from './routes/comment.js'
 
 
 const app=express()
@@ -20,7 +21,7 @@ app.use('/register', registerRouter)
 // app.use(verifyToken)
 app.use('/user', userRouter)
 app.use('/post', postRouter)
-
+app.use('/comment', commentRouter)
 
 
 

@@ -13,16 +13,28 @@ const Reaction=database.define('reactions', {
     },
     post_id:    {
         type: Sequelize.INTEGER,
-        model: 'posts',
-        key: 'post_id'
+        reference:  {
+            model: 'posts',
+            key: 'post_id'
+        }
     },
     user_id:    {
         type: Sequelize.INTEGER,
-        model: 'users',
-        key: 'user_id'
+        reference:  {
+            model: 'users',
+            key: 'user_id'
+        }
     },
-    createdAt: Sequelize.DATE,
-    updatedAt: Sequelize.DATE
+    createdAt: {
+        type: Sequelize.DATE,
+        allowNull: false,
+        defaultValue: Sequelize.NOW
+    },   
+    updatedAt: {
+        type: Sequelize.DATE,
+        allowNull: false,
+        defaultValue: Sequelize.NOW
+    }
 })  
 
 export default Reaction
