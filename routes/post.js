@@ -1,8 +1,10 @@
 import express from 'express'
 const router=express.Router()
 
+import database from '../config/database.js'
 
 import Post from '../models/Post.js'
+import Reaction from '../models/Reaction.js'
 import User from '../models/User.js'
 
 router.post('/', async (req, res)=> {
@@ -29,9 +31,12 @@ router.get('/', async (req, res)=>  {
         const limit=10
         const page=parseInt(req.query.page)
         
+		/*
         User.hasOne(Post, { foreignKey: 'user_id' })
         Post.belongsTo(User, { foreignKey: 'user_id', targetKey: 'user_id' })
 
+		//Reaction.hasOne(Post, P
+		
         const result=await Post.findAll({
             offset: page*limit,
             limit: limit,
@@ -42,7 +47,12 @@ router.get('/', async (req, res)=>  {
                     attributes: ['user_id','name','photo_url'],
                 }
             ]
-        })
+        })		
+		*/
+		
+		const result=await database.query("select users.user_id, users.name, users.photo_url as 'user_photo_url', posts.post_id, posts.caption, posts.photo_url, reactions.status, (select count(reaction_id) from reactions where reactions.post_id=posts.post_id) as 'reactions' from posts inner join users on posts.user_id=users.user_id left join reactions on reactions.post_id=posts.post_id where reactions.user_id = :user_id limit :limit offset :offset", { replacements: { user_id: req.query.user_id, limit: limit, offset: page*limit }, type: database.QueryTypes.SELECT })			
+		
+
         if(result)  {
             return res.status(200).json({ message: 'Successfully loaded the posts', posts: result })
         }   else    {
