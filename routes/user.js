@@ -11,6 +11,10 @@ router.get('/', async (req, res)=>  {
         const result=await User.findAll({
             offset: page*limit,
             limit: limit,
+			attributes:	['user_id','name','role'],
+			order: [
+				['name', 'asc']
+			]	
         })
         if(result)  {
             return res.status(200).json({ message: 'Successfully loaded the users', users: result })

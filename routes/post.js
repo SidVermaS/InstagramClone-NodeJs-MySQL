@@ -50,8 +50,7 @@ router.get('/', async (req, res)=>  {
         })		
 		*/
 		
-		const result=await database.query("select users.user_id, users.name, users.photo_url as 'user_photo_url', posts.post_id, posts.caption, posts.photo_url, reactions.status, (select count(reaction_id) from reactions where reactions.post_id=posts.post_id) as 'reactions' from posts inner join users on posts.user_id=users.user_id left join reactions on reactions.post_id=posts.post_id where reactions.user_id = :user_id limit :limit offset :offset", { replacements: { user_id: req.query.user_id, limit: limit, offset: page*limit }, type: database.QueryTypes.SELECT })			
-		
+		const result=await database.query("select users.user_id, users.name, users.photo_url as 'user_photo_url', posts.post_id, posts.caption, posts.photo_url, posts.createdAt, (select status from reactions where reactions.post_id=posts.post_id and reactions.user_id = :user_id) as 'status', (select count(reaction_id) from reactions where reactions.post_id=posts.post_id) as 'reactions_count', (select count(comment_id) from comments where comments.post_id=posts.post_id) as 'comments_count' from posts inner join users on posts.user_id=users.user_id order by posts.createdAt desc limit :limit offset :offset", { replacements: { user_id: req.query.user_id, limit: limit, offset: page*limit }, type: database.QueryTypes.SELECT })
 
         if(result)  {
             return res.status(200).json({ message: 'Successfully loaded the posts', posts: result })

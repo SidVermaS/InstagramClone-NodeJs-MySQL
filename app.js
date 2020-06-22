@@ -21,7 +21,8 @@ app.use(bodyParser.json({ limit: '50mb' }))
 app.use('/login', loginRouter)
 app.use('/register', registerRouter)
 
-app.use('/uploads/posts',express.static(__dirname+'/uploads/posts'))
+app.use('/uploads/posts', express.static(__dirname+'/uploads/posts'))
+app.use('/uploads/users', express.static(__dirname+'/uploads/users'))
 
 //app.use(verifyToken)
 app.use('/user', userRouter)

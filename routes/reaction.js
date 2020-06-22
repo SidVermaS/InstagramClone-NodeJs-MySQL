@@ -21,8 +21,8 @@ router.patch('/', async (req, res)=>    {
                         user_id: reqReaction.user_id
                     }
                 })
-                if(result[0]!==0)  {
-                    return res.status(201).json({ message: 'Successfully dereacted', reaction: result })         
+                if(result===1)  {
+                    return res.status(200).json({ message: 'Successfully dereacted', reaction: result })         
                 }   else    {
                     return res.status(400).json({ message: 'Failed to dereact', })
                 }  
@@ -34,10 +34,10 @@ router.patch('/', async (req, res)=>    {
                             user_id: reqReaction.user_id
                         } 
                     })
-                if(result[0]!==0)  {
-                    return res.status(201).json({ message: 'Successfully reacted', reaction: result1 })         
+                if(result1)  {
+                    return res.status(200).json({ message: 'Successfully reacted', reaction: result1 })         
                 }   else    {
-                    return res.status(400).json({ message: 'Failed to react', })
+                    return res.status(400).json({ message: '1 Failed to react', result1})
                 }    
             }
         }   else    {
@@ -47,9 +47,13 @@ router.patch('/', async (req, res)=>    {
                     post_id: reqReaction.post_id,
                     user_id: reqReaction.user_id
                 })
-                return res.status(201).json({ message: 'Successfully reacted', reaction: result2 })
+				if(result2)  {
+                    return res.status(200).json({ message: 'Successfully reacted', reaction: result2 })         
+                }   else    {
+                    return res.status(400).json({ message: '1 Failed to react', })
+                } 
             }   else    {
-                return res.status(400).json({ message: 'Failed to react', })
+                return res.status(400).json({ message: '2 Failed to react', })
             }
         }
     }   catch(err)  { 
