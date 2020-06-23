@@ -1,6 +1,8 @@
 import express from 'express'
 const router=express.Router()
 
+import database from '../config/database.js'
+
 import md5 from 'md5'
 import User from '../models/User.js'
 
@@ -11,7 +13,7 @@ router.get('/', async (req, res)=>  {
         const result=await User.findAll({
             offset: page*limit,
             limit: limit,
-			attributes:	['user_id','name','role'],
+			attributes:	['user_id','name','role','photo_url'],
 			order: [
 				['name', 'asc']
 			]	
@@ -31,15 +33,18 @@ router.get('/:user_id', async (req, res)=>  {
     
     try {
         const user_id=parseInt(req.params.user_id)
-
+		/*
         const result=await User.findOne({
             attributes: ['user_id','mobile_no','name','role','photo_url'],
             where:  {
                 user_id: user_id
             }
         })
+		*/
+		const result=await database.query("select users.user_id, name, role, photo_url, mobile_no, (select count(post_id) from posts where user_id=:user_id) as 'posts_count', (select count(reaction_id) from reactions where reactions.user_id=:user_id and status='like') as 'reactions_count' from users where user_id = :user_id", { replacements:	{
+		user_id: user_id, user_id: user_id, user_id: user_id }, type: database.QueryTypes.SELECT })
         if(result)  {
-            return res.status(200).json({ message: 'Successfully loaded the user', user: result })
+            return res.status(200).json({ message: 'Successfully loaded the user', user: result[0] })
         }   else    {
             return res.status(500).json({ message: 'Failed to load the user', })
         }
