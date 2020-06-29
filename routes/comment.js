@@ -25,7 +25,7 @@ router.post('/', async (req, res)=> {
 })
 
 
-router.get('/:post_id', async (req, res)=>  {
+router.get('/', async (req, res)=>  {
     try {
         const limit=10
         const page=parseInt(req.query.page)
@@ -40,11 +40,14 @@ router.get('/:post_id', async (req, res)=>  {
             include:    [
                 {
                     model: User,
-                    attributes: ['user_id', 'name', ]
+                    attributes: ['user_id', 'name','photo_url' ]
                 }
             ],
+			order:	[
+				['createdAt', 'desc']
+			],
             where:  {
-                post_id: parseInt(req.params.post_id)
+           //     post_id: parseInt(req.query.post_id)
             }         
         })
         if(result)  {
