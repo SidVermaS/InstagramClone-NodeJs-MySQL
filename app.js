@@ -3,6 +3,7 @@ import express from 'express'
 import bodyParser from 'body-parser'
 import cors from 'cors'
 import jwt from 'jsonwebtoken'
+//import expressWs from 'express-ws'
 import fileupload from 'express-fileupload'
 
 import registerRouter from './routes/register.js'
@@ -11,9 +12,11 @@ import userRouter from './routes/user.js'
 import postRouter from './routes/post.js'
 import commentRouter from './routes/comment.js'
 import reactionRouter from './routes/reaction.js'
+import chatRouter from './routes/chat.js'
 import uploadRouter from './routes/upload.js'
 
 const app=express()
+//expressWs(app)
 app.use(cors())
 app.use(bodyParser.json({ limit: '50mb' }))
 
@@ -29,6 +32,7 @@ app.use('/user', userRouter)
 app.use('/post', postRouter)
 app.use('/reaction', reactionRouter)
 app.use('/comment', commentRouter)
+app.use('/chat', chatRouter)
 
 app.use(fileupload())
 app.use('/upload', uploadRouter)
