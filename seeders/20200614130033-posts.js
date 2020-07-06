@@ -15,56 +15,56 @@ module.exports = {
     return queryInterface.bulkInsert('posts', [
       {
         post_id: 1,
-        caption: '1st caption',
-        photo_url: 'default.jpg',
+        caption: 'This is the caption of the first post',
+        photo_url: 'img1.jpg',
         user_id: 1,
         updatedAt: "2020-05-29T02:48:51.030Z",
         createdAt: "2020-05-29T02:48:51.030Z"  
       },
       {
         post_id: 2,
-        caption: '1st caption',
-        photo_url: 'default.jpg',
+        caption: 'This is the caption of the second post',
+        photo_url: 'img2.jpg',
         user_id: 1,
         updatedAt: "2020-05-29T02:48:51.030Z",
         createdAt: "2020-05-29T02:48:51.030Z"  
       },
       {
         post_id: 3,
-        caption: '1st caption',
-        photo_url: 'default.jpg',
+        caption: 'This is the caption of the third post',
+        photo_url: 'img3.jpg',
         user_id: 1,
         updatedAt: "2020-05-29T02:48:51.030Z",
         createdAt: "2020-05-29T02:48:51.030Z"  
       },
       {
         post_id: 4,
-        caption: '1st caption',
-        photo_url: 'default.jpg',
+        caption: 'This is the caption of the fourth post',
+        photo_url: 'img4.jpg',
         user_id: 2,
         updatedAt: "2020-05-29T02:48:51.030Z",
         createdAt: "2020-05-29T02:48:51.030Z"  
       },
       {
         post_id: 5,
-        caption: '1st caption',
-        photo_url: 'default.jpg',
+        caption: 'This is the caption of the fifth post',
+        photo_url: 'img5.jpg',
         user_id: 2,
         updatedAt: "2020-05-29T02:48:51.030Z",
         createdAt: "2020-05-29T02:48:51.030Z"  
       },
       {
         post_id: 6,
-        caption: '1st caption',
-        photo_url: 'default.jpg',
+        caption: 'This is the caption of the sixth post',
+        photo_url: 'img6.jpg',
         user_id: 3,
         updatedAt: "2020-05-29T02:48:51.030Z",
         createdAt: "2020-05-29T02:48:51.030Z"  
       },
       {
         post_id: 7,
-        caption: '1st caption',
-        photo_url: 'default.jpg',
+        caption: 'This is the caption of the seventh post',
+        photo_url: 'img7.jpg',
         user_id: 3,
         updatedAt: "2020-05-29T02:48:51.030Z",
         createdAt: "2020-05-29T02:48:51.030Z"  

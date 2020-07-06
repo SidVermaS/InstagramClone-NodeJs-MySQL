@@ -9,12 +9,13 @@ router.post('/', async (req, res)=> {
         const file_type=req.query.file_type
 		
         const file=req.files.file
-		console.log('file: ',)
-		const jointPath=(path.join(__dirname,`../uploads/${file_type}/${uuidv1()}.${file.mimetype.split('/')[1]}`))
+		console.log('file: ',file)
+		const subPath=`${uuidv1()}.${file.mimetype.split('/')[1]}`
+		const jointPath=(path.join(__dirname,`../uploads/${file_type}/${subPath}`))
 		
         const result=await file.mv(jointPath)
 		
-        return res.status(200).json({ message: 'Successfully uploaded the photo', photo: result })
+        return res.status(201).json({ message: 'Successfully uploaded the photo', photo_url: subPath })
         
         
     }   catch(err)  { 
