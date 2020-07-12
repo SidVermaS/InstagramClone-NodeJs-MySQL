@@ -16,7 +16,7 @@ router.post('/', async (req, res)=> {
 			}	
 		})
 		if(result)	{
-			return res.status(400).json({ message: 'Mobile no. is already registered', })   			 
+			return res.status(409).json({ message: 'Mobile no. is already registered', })   			 
 		}   else    {    
             result=await User.create({
 				mobile_no: reqUser.mobile_no,
@@ -32,6 +32,28 @@ router.post('/', async (req, res)=> {
         }		
     }   catch(err)  { 
         return res.status(500).json({ message: 'Failed to register', error: err })
+    } 
+})
+
+
+router.post('/exists', async (req, res)=>	{	
+	try	{
+		const reqUser=req.body
+
+		let result=await User.findOne({
+			attributes: ['mobile_no'],
+			where:	{
+				mobile_no: reqUser.mobile_no,	
+			}	
+		})
+		if(result)  {
+			return res.status(409).json({ message: 'Mobile no. is already registered', result: result })
+		}   else    {
+			return res.status(200).json({ message: 'Mobile no. is not registered', result: result })
+		} 
+
+    }   catch(err)  { 
+        return res.status(500).json({ message: 'Failed to verify', error: err })
     } 
 })
 
