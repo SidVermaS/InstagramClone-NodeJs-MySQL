@@ -10,7 +10,7 @@ import User from '../models/User.js'
 router.post('/', async (req, res)=> {
     try {
         const reqPost=req.body
-
+		console.log('req: ',reqPost)
         const result=await Post.create({
             caption: reqPost.caption,
             photo_url: reqPost.photo_url,
@@ -62,6 +62,30 @@ router.get('/', async (req, res)=>  {
     } 
 })
 
+router.get('/explore', async (req, res)=>	{
+	try	{
+		const page=parseInt(req.query.page)
+		const limit=18
+		const user_id=parseInt(req.query.user_id)	
+		
+		const result=await Post.findAll({
+			offset: page*limit,
+			limit: limit,
+			attributes: ['post_id', 'photo_url'],
+			order: [
+				['createdAt', 'desc']
+			],
+		})
+		if(result)  {
+            return res.status(200).json({ message: 'Successfully loaded the posts', posts: result })
+        }   else    {
+            return res.status(500).json({ message: 'Failed to load the posts', })
+        }    
+
+    }   catch(err)  { 
+        return res.status(500).json({ message: 'Failed to load the posts', error: err })
+    } 
+})
 
 router.get('/user', async (req, res)=>	{
 	try	{
@@ -72,12 +96,12 @@ router.get('/user', async (req, res)=>	{
 		const result=await Post.findAll({
 			offset: page*limit,
 			limit: limit,
-			attributes: ['post_id', 'caption', 'photo_url'],
+			attributes: ['post_id', 'photo_url'],
 			order: [
 				['createdAt', 'desc']
 			],
 			where:	{
-				user_id: user_id	
+		//		user_id: user_id	
 			}
 		})
 		if(result)  {
