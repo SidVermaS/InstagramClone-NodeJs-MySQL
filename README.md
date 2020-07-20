@@ -21,9 +21,12 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 ### Note
 This project is for educational purpose only.
 
-### Other Tech Stacks
+### Tech Stacks
+Web App: Vue.js
+https://github.com/SiddharthVermaS/InstagramClone-VueJS
+
 Mobile App: Flutter
 https://github.com/SiddharthVermaS/InstagramClone-Flutter
 
-Web App: Vue.js
-https://github.com/SiddharthVermaS/InstagramClone-VueJS
+Backend: Node.js
+https://github.com/SiddharthVermaS/InstagramClone-NodeJs-MySQL
